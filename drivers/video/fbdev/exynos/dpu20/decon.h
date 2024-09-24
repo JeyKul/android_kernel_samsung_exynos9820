@@ -1175,16 +1175,6 @@ struct profile_data {
 };
 #endif
 
-struct decon_edid_data {
-	int size;
-	u8 edid_data[EDID_BLOCK_SIZE * MAX_EDID_BLOCK];
-};
-
-struct vsync_applied_time_data {
-	u32 config;
-	u64 time;
-	u32 reserved[4];
-};
 
 struct decon_device {
 	int id;
@@ -1412,7 +1402,6 @@ void decon_destroy_last_info(struct decon_device *decon);
 #endif
 int decon_create_psr_info(struct decon_device *decon);
 void decon_destroy_psr_info(struct decon_device *decon);
-void decon_get_edid(struct decon_device *decon, struct decon_edid_data *edid_data);
 
 /* DECON to writeback interface functions */
 int decon_wb_register_irq(struct decon_device *decon);
@@ -1436,8 +1425,6 @@ int decon_displayport_get_config(struct decon_device *dex,
 		struct exynos_displayport_data *displayport_data);
 int decon_displayport_set_config(struct decon_device *dex,
 		struct exynos_displayport_data *displayport_data);
-int decon_displayport_get_edid(struct decon_device *decon,
-		struct decon_edid_data *edid);
 #endif
 
 /* window update related function */
@@ -1949,12 +1936,6 @@ int _decon_enable(struct decon_device *decon, enum decon_state state);
 #define EXYNOS_GET_COLOR_MODE_NUM	_IOW('F', 600, __u32)
 #define EXYNOS_GET_COLOR_MODE		_IOW('F', 601, struct decon_color_mode_info)
 #define EXYNOS_SET_COLOR_MODE		_IOW('F', 602, __u32)
-
-/* EDID data */
-#define EXYNOS_GET_EDID		_IOW('F', 800, struct decon_edid_data)
-
-/* For HWC2.4 */
-#define EXYNOS_GET_VSYNC_CHANGE_TIMELINE	_IOW('F', 850, struct vsync_applied_time_data)
 
 #if defined(CONFIG_EXYNOS_COMMON_PANEL)
 #define V4L2_EVENT_DECON                (V4L2_EVENT_PRIVATE_START + 1000)
