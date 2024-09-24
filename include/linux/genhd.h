@@ -81,6 +81,7 @@ struct partition {
 	__le32 nr_sects;		/* nr of sectors in partition */
 } __attribute__((packed));
 
+#define FSYNC_TIME_GROUP_MAX 4
 #define IO_SIZE_GROUP_MAX 8
 struct disk_stats {
 	unsigned long sectors[2];	/* READs and WRITEs */
@@ -183,6 +184,7 @@ struct accumulated_stats {
 	unsigned long sectors[3];	/* READ, WRITE, DISCARD */
 	unsigned long ios[3];
 	unsigned long size_cnt[3][IO_SIZE_GROUP_MAX];
+	unsigned long fsync_time_cnt[FSYNC_TIME_GROUP_MAX];
 	unsigned long iot;		/* sec */
 };
 
